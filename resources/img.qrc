@@ -1,5 +1,6 @@
 <RCC>
 	<qresource>
-		<file>main_icon.png</file>		
+		<file>main_icon.png</file>
+		<file>mime_face.png</file>
 	</qresource>
 </RCC>
