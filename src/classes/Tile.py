@@ -13,11 +13,11 @@ class Tile(QPushButton):
 
         # creating the game field by iterating and creating tiles
         self.setCheckable(True)
-        self.setContentsMargins(0, 0, 0, 0)
+        self.setFixedHeight(45)
+        self.setFixedWidth(45)
         self.parent = window
         self.content = ''
         self.neighbouring_mimes = 0
-        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         window.tile_list.append(self)
 
     def reveal_tile(self):

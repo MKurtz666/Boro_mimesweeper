@@ -11,7 +11,7 @@ class MimeSweeperMain(QMainWindow):
         mimesweeper_main_create_gui(self)
 
         # ---------------------  the below will be moved to gui creation file later in the development
-        self.setGeometry(300, 300, 400, 400)
+        self.setGeometry(320, 320, 430, 450)
         self.setWindowIcon(QIcon('://main_icon.png'))
         menu_bar = QMenuBar(self)
         self.setMenuBar(menu_bar)
@@ -20,10 +20,9 @@ class MimeSweeperMain(QMainWindow):
         self.central_layout = QGridLayout()
         self.central_layout.setContentsMargins(0, 0, 0, 0)
         self.central_layout.setSpacing(0)
-        self.mine_count = 0
         self.tile_list = []
         self.mime_list = []
-        self.mime_number = 20
+        self.mimes_to_be_deployed = 20
         self.central_widget.setLayout(self.central_layout)
         self.setCentralWidget(self.central_widget)
         self.setFixedSize(self.size())
@@ -31,7 +30,6 @@ class MimeSweeperMain(QMainWindow):
         create_tiles(self)
         generate_mimes(self)
         generate_clean_tiles(self)
-
 
 
 if __name__ == '__main__':

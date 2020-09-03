@@ -17,11 +17,13 @@ def create_tiles(window):
 
 
 def generate_mimes(window):
-    for x in range(window.mime_number):
+    while window.mimes_to_be_deployed > 0:
         chosen_tile = choice(window.tile_list)
-        chosen_tile.content = 'MIME'
-        chosen_tile.clicked.connect(chosen_tile.reveal_tile)
-        window.mime_list.append(chosen_tile)
+        if chosen_tile.content != 'MIME':
+            chosen_tile.content = 'MIME'
+            chosen_tile.clicked.connect(chosen_tile.reveal_tile)
+            window.mime_list.append(chosen_tile)
+            window.mimes_to_be_deployed -= 1
 
 
 def generate_clean_tiles(window):
