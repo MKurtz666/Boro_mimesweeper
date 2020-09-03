@@ -13,8 +13,30 @@ class Tile(QPushButton):
 
         # creating the game field by iterating and creating tiles
         self.setCheckable(True)
+        self.setContentsMargins(0, 0, 0, 0)
+        self.parent = window
         self.content = ''
+        self.neighbouring_mimes = 0
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         window.tile_list.append(self)
+
+    def reveal_tile(self):
+        if self.content == 'MIME':
+            for mime in self.parent.mime_list:
+                mime.setIcon(QIcon('://mime_face.png'))
+                mime.setIconSize(QSize(20, 20))
+                mime.setChecked(True)
+        else:
+            self.setText(self.content)
+            self.setChecked(True)
+
+    def mousePressEvent(self, QMouseEvent):
+        if QMouseEvent.button() == Qt.RightButton:
+            self.setIcon(QIcon('://caution_icon.png'))
+            self.setIconSize(QSize(20, 20))
+        else:
+            self.reveal_tile()
+
+
 
 
