@@ -49,17 +49,19 @@ class Tile(QPushButton):
                 mime.setIconSize(QSize(20, 20))
                 mime.setChecked(True)
         elif self.content == '0':
-            for row in self.parent.matrix:
-                for tile in row:
+            for r_index, row in enumerate(self.parent.matrix):
+                for t_index, tile in enumerate(row):
                     if tile is self:
-                        row_index = self.parent.matrix.index(row)
-                        tile_index = row.index(tile)
+                        row_index = r_index
+                        tile_index = t_index
             self.setText(self.content)
             self.setChecked(True)
+            self.setStyleSheet('QPushButton {background-color: green; color: white;}')
             self.reveal_neighbouring_zeros(row_index, tile_index)
         else:
             self.setText(self.content)
             self.setChecked(True)
+            self.setStyleSheet('QPushButton {background-color: orange;}')
 
     def reveal_neighbouring_zeros(self, row_index, tile_index):
         # checking for tiles containing a number further down the row

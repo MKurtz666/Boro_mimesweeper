@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
-from src.gui.main_create_gui import mimesweeper_main_create_gui, create_tiles, generate_mimes, generate_clean_tiles, \
-    create_matrix
+from src.gui.main_create_gui import mimesweeper_main_create_gui, create_tiles
+from src.mechanics.mechanics import generate_mimes, generate_clean_tiles, create_matrix
 
 
 class MimeSweeperMain(QMainWindow):
