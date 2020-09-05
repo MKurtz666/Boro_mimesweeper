@@ -45,6 +45,7 @@ class Tile(QPushButton):
     def reveal_tile(self):
         if self.content == 'MIME':
             for mime in self.parent.mime_list:
+                mime.setStyleSheet('QPushButton {background-color: red;}')
                 mime.setIcon(QIcon('://mime_face.png'))
                 mime.setIconSize(QSize(20, 20))
                 mime.setChecked(True)

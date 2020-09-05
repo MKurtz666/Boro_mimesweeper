@@ -16,17 +16,19 @@ def generate_mimes(window):
 
 
 def create_matrix(window):
-    window.matrix = [[tile for tile in window.tile_list[window.tile_list.index(tile):window.tile_list.index(tile) + 10]]
-                     for tile in window.tile_list[::10]]
+    window.matrix = [[tile for tile in window.tile_list[window.tile_list.index(tile):window.tile_list.index(tile) +
+                        window.map_width]] for tile in window.tile_list[::window.map_width]]
 
 
 def check_if_tile_in_range(matrix, row_index, tile_index_to_be_ckecked):
+    # checking if given tile index is in range to avoid indexError
     if tile_index_to_be_ckecked <= len(matrix[row_index]) - 1:
         return True
     return False
 
 
 def check_if_row_in_range(matrix, row_index_to_be_ckecked):
+    # checking if given row index is in range to avoid indexError
     if row_index_to_be_ckecked <= len(matrix) - 1:
         return True
     return False
@@ -47,20 +49,41 @@ def generate_clean_tiles(window):
                         tile.neighbouring_mimes += 1
                 # checking if tile 'up' is in matrix range
                 if check_if_row_in_range(matrix, row_index - 1):
-                    # if tile 'up' in range and tile not in first row adding to count of neighboring mimes
                     if row_index != 0:
                         if matrix[row_index - 1][tile_index] in window.mime_list:
                             tile.neighbouring_mimes += 1
                 # checking if tile 'down' in range of matrix
                 if check_if_row_in_range(matrix, row_index + 1):
-                    # if tile 'down' in range of matrix adding to the count of neighbouring mimes
                     if matrix[row_index + 1][tile_index] in window.mime_list:
                         tile.neighbouring_mimes += 1
                 # checking if tile 'to the left' is in row range
                 if check_if_tile_in_range(matrix, row_index, tile_index - 1):
-                    # if tile 'to the left' is in row range adding to the count of neighbouring mimes
                     if tile_index != 0:
                         if row[tile_index - 1] in window.mime_list:
                             tile.neighbouring_mimes += 1
+                # checking if tile 'up and to the left' is in matrix range
+                if check_if_row_in_range(matrix, row_index - 1) and \
+                        check_if_tile_in_range(matrix, row_index - 1, tile_index - 1):
+                    if row_index != 0 and tile_index != 0:
+                        if matrix[row_index - 1][tile_index - 1] in window.mime_list:
+                            tile.neighbouring_mimes += 1
+                # checking if tile 'up and to the right' is in matrix range
+                if check_if_row_in_range(matrix, row_index - 1) and \
+                        check_if_tile_in_range(matrix, row_index - 1, tile_index + 1):
+                    if row_index != 0:
+                        if matrix[row_index - 1][tile_index + 1] in window.mime_list:
+                            tile.neighbouring_mimes += 1
+                # checking if tile 'down and to the right' is in matrix range
+                if check_if_row_in_range(matrix, row_index + 1) and \
+                        check_if_tile_in_range(matrix, row_index + 1, tile_index + 1):
+                    if matrix[row_index + 1][tile_index + 1] in window.mime_list:
+                        tile.neighbouring_mimes += 1
+                # checking if tile 'down and to the left' is in matrix range
+                if check_if_row_in_range(matrix, row_index + 1) and \
+                        check_if_tile_in_range(matrix, row_index + 1, tile_index - 1):
+                    if tile_index != 0:
+                        if matrix[row_index + 1][tile_index - 1] in window.mime_list:
+                            tile.neighbouring_mimes += 1
+
                 # setting the (yet invisible) tile content to reflect number of neighbor mimes
                 tile.content = str(tile.neighbouring_mimes)
