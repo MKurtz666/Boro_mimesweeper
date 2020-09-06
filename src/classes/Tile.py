@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtGui import QIcon
+from src.stylesheets.stylesheets import mime_tile_checked, zero_tile_checked, number_tile_checked
 import resources
 
 
@@ -55,7 +56,7 @@ class Tile(QPushButton):
         if self.content == 'MIME':
             # if the content of a tile is 'MIME' all MIME tiles are revealed and a game over message box is triggered
             for mime in self.parent.mime_list:
-                mime.setStyleSheet('QPushButton {background-color: red;}')
+                mime.setStyleSheet(mime_tile_checked)
                 mime.setIcon(QIcon('://mime_face.png'))
                 mime.setIconSize(QSize(20, 20))
                 mime.setChecked(True)
@@ -71,14 +72,14 @@ class Tile(QPushButton):
             self.setText(self.content)
             self.setChecked(True)
             self.setIcon(QIcon())
-            self.setStyleSheet('QPushButton {background-color: green; color: white;}')
+            self.setStyleSheet(zero_tile_checked)
             self.reveal_neighbouring_zeros(row_index, tile_index)
         else:
             # if content is neither 'MIME' nor '0' (some MIMEs in the neighbourhood) reveal tile
             self.setText(self.content)
             self.setChecked(True)
             self.setIcon(QIcon())
-            self.setStyleSheet('QPushButton {background-color: orange;}')
+            self.setStyleSheet(number_tile_checked)
 
     def reveal_neighbouring_zeros(self, row_index, tile_index):
         # checking for tiles containing a number further down the row

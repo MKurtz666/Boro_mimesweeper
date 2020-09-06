@@ -2,6 +2,7 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout
 from PyQt5.QtGui import QIcon
 from src.classes.Tile import Tile
+from src.stylesheets.stylesheets import dark_grey
 from random import choice
 
 
@@ -40,6 +41,7 @@ def mimesweeper_main_create_gui(window):
     window.mimes_to_be_deployed = 20
     window.central_widget.setLayout(window.central_layout)
     window.setCentralWidget(window.central_widget)
+    window.setStyleSheet(dark_grey)
 
 
 def create_tiles(window):
