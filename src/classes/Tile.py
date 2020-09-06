@@ -1,6 +1,6 @@
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtGui import QIcon
 import resources
 
 
@@ -9,27 +9,34 @@ class Tile(QPushButton):
     def __init__(self, window):
         QPushButton.__init__(self)
         self.setCheckable(True)
-        self.setFixedHeight(45)
-        self.setFixedWidth(45)
+        # setting button size
+        self.setFixedSize(QSize(45, 45))
         self.parent = window
+        # button content left empty for now
         self.content = ''
+        # no neighbouring mimes added yet
         self.neighbouring_mimes = 0
+        # tile not flagged so this attr is False by default
         self.caution_flag = False
+        # adding tile to the parent tile_list for use in logic
         window.tile_list.append(self)
 
     @staticmethod
     def check_if_tile_in_range(matrix, row_index, tile_index_to_be_ckecked):
+        # checking if tile with a given position in the matrix is available to avoid index error
         if tile_index_to_be_ckecked <= len(matrix[row_index]) - 1:
             return True
         return False
 
     @staticmethod
     def check_if_row_in_range(matrix, row_index_to_be_ckecked):
+        # checking if row with a given index in the matrix is available to avoid index error
         if row_index_to_be_ckecked <= len(matrix) - 1:
             return True
         return False
 
     def mousePressEvent(self, QMouseEvent):
+        # overriding mousePressEvent to be able to set/remove caution flags with righ click...
         if QMouseEvent.button() == Qt.RightButton:
             if not self.isChecked():
                 if self.caution_flag is False:
@@ -39,17 +46,23 @@ class Tile(QPushButton):
                 else:
                     self.setIcon(QIcon())
                     self.caution_flag = False
+        # and reveal tiles with left click
         else:
             self.reveal_tile()
 
     def reveal_tile(self):
+        # depending on the content of the tile, revealing it and taking action
         if self.content == 'MIME':
+            # if the content of a tile is 'MIME' all MIME tiles are revealed and a game over message box is triggered
             for mime in self.parent.mime_list:
                 mime.setStyleSheet('QPushButton {background-color: red;}')
                 mime.setIcon(QIcon('://mime_face.png'))
                 mime.setIconSize(QSize(20, 20))
                 mime.setChecked(True)
+            self.parent.close()
         elif self.content == '0':
+            # if the content is '0' (so no MIMES to the left, right, up, down and diagonally) reveal and trigger same
+            # method for neighbouring tiles
             for r_index, row in enumerate(self.parent.matrix):
                 for t_index, tile in enumerate(row):
                     if tile is self:
@@ -57,11 +70,14 @@ class Tile(QPushButton):
                         tile_index = t_index
             self.setText(self.content)
             self.setChecked(True)
+            self.setIcon(QIcon())
             self.setStyleSheet('QPushButton {background-color: green; color: white;}')
             self.reveal_neighbouring_zeros(row_index, tile_index)
         else:
+            # if content is neither 'MIME' nor '0' (some MIMEs in the neighbourhood) reveal tile
             self.setText(self.content)
             self.setChecked(True)
+            self.setIcon(QIcon())
             self.setStyleSheet('QPushButton {background-color: orange;}')
 
     def reveal_neighbouring_zeros(self, row_index, tile_index):

@@ -1,6 +1,3 @@
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
 from src.classes.Tile import Tile
 from random import choice
 

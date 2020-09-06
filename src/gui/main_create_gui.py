@@ -1,15 +1,19 @@
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout
+from PyQt5.QtGui import QIcon
 from src.classes.Tile import Tile
 from random import choice
 
 
 def mimesweeper_main_create_gui(window):
-    window.setWindowIcon(QIcon('://main_icon.png'))
+    window.setWindowIcon(QIcon('://mime_face.png'))
     window.width = 430
     window.height = 450
-    window.setGeometry(320, 320, window.width, window.height)
+    window.setFixedSize(QSize(window.width, window.height))
+    qt_rectangle = window.frameGeometry()
+    center_point = QDesktopWidget().availableGeometry().center()
+    qt_rectangle.moveCenter(center_point)
+    window.move(qt_rectangle.topLeft())
     menu_bar = QMenuBar(window)
     window.setMenuBar(menu_bar)
     file_menu = menu_bar.addMenu('File')
@@ -32,6 +36,8 @@ def create_tiles(window):
         for y in range(window.map_height):
             tile = Tile(window)
             window.central_layout.addWidget(tile, x, y, 1, 1)
+
+
 
 
 
