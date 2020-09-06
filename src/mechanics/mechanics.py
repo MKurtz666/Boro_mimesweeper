@@ -3,16 +3,20 @@ from random import choice
 
 
 def generate_mimes(window):
+    # when the tiles are created the function assigns random tiles with 'MIME' content rendering them
+    # deadly when stepped on. The number of times the function does that is dependent on how many mimes
+    # there are to be generated according top the parent window class attrib
     while window.mimes_to_be_deployed > 0:
         chosen_tile = choice(window.tile_list)
         if chosen_tile.content != 'MIME':
             chosen_tile.content = 'MIME'
-            chosen_tile.clicked.connect(chosen_tile.reveal_tile)
+            # adding the MIME tiles to mime_list for later use in logic
             window.mime_list.append(chosen_tile)
             window.mimes_to_be_deployed -= 1
 
 
 def create_matrix(window):
+    # creating a 2d matrix of tiles for later use in logic based on the parent window tile_list
     window.matrix = [[tile for tile in window.tile_list[window.tile_list.index(tile):window.tile_list.index(tile) +
                         window.map_width]] for tile in window.tile_list[::window.map_width]]
 
@@ -32,6 +36,7 @@ def check_if_row_in_range(matrix, row_index_to_be_ckecked):
 
 
 def generate_clean_tiles(window):
+    # assigning appropriate content - that is the number of neighbouring mimes - to tiles that are not MIME tiles
     matrix = window.matrix
     # enumerating rows in matrix
     for row_index, row in enumerate(matrix):
