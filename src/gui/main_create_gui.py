@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout
+from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout, QMessageBox
 from PyQt5.QtGui import QIcon
 from src.classes.Tile import Tile
 from src.stylesheets.stylesheets import dark_grey
@@ -10,8 +10,6 @@ def mimesweeper_main_create_gui(window):
     window.setWindowIcon(QIcon('://mime_face.png'))
     # setting height and width as class attribs with the intent of later introducing functionality of changing them
     # by the player via additional dialog
-    window.width = 430
-    window.height = 450
     window.setFixedSize(QSize(window.width, window.height))
     # retrieving the geometry of the main window
     qt_rectangle = window.frameGeometry()
@@ -33,15 +31,10 @@ def mimesweeper_main_create_gui(window):
     # creating lists of all tiles and MIME tiles for later use in game logic
     window.tile_list = []
     window.mime_list = []
-    # setting height and width of map/matrix as class attribs with the intent of later introducing functionality of
-    # changing them by the player via additional dialog
-    window.map_width = 10
-    window.map_height = 10
-    # same as above - number of mimes to deploy to be determined by player in future
-    window.mimes_to_be_deployed = 20
     window.central_widget.setLayout(window.central_layout)
     window.setCentralWidget(window.central_widget)
     window.setStyleSheet(dark_grey)
+    window.show()
 
 
 def create_tiles(window):

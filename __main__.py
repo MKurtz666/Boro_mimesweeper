@@ -6,5 +6,5 @@ if __name__ == '__main__':
     mime_sweeper = QApplication([])
     mime_sweeper.setApplicationName('Mimesweeper')
     main_window = MimeSweeperMain()
-    main_window.show()
     mime_sweeper.exec_()
+

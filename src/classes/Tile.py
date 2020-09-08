@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QMessageBox
 from PyQt5.QtGui import QIcon
 from src.stylesheets.stylesheets import mime_tile_checked, zero_tile_checked, number_tile_checked
 import resources
@@ -60,7 +60,7 @@ class Tile(QPushButton):
                 mime.setIcon(QIcon('://mime_face.png'))
                 mime.setIconSize(QSize(20, 20))
                 mime.setChecked(True)
-            self.parent.close()
+            self.parent.stepped_on_a_mime()
         elif self.content == '0':
             # if the content is '0' (so no MIMES to the left, right, up, down and diagonally) reveal and trigger same
             # method for neighbouring tiles

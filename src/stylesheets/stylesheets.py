@@ -46,17 +46,9 @@ QPushButton {
         color: #e2e6e9;                  
 }
 
-QPushButton::checked {  
-        border-style: inset; 
-        border-width: 5px;                
-}
-
 QMessageBox {        
         background-color: #7c8e9c;
-}
-
-QMessageBox QLabel {
-        color: #e2e6e9;
+        font-size: 15px;
 }
 
 QMessageBox QPushButton {         
@@ -66,16 +58,19 @@ QMessageBox QPushButton {
 }
 
 QDialog {
-        background-color: #7c8e9c;        
+        background-color: #7c8e9c; 
+        font-size: 15px;       
 }
 
 QDialog QPushButton {         
         background-color: #7c8e9c;
         color: #e2e6e9;
+        font-size: 15px;
 }
 
 QDialog QLabel{
         color: #e2e6e9;
+        font-size: 15px;
 }
 
 QStatusBar QLineEdit {
@@ -92,6 +87,8 @@ mime_tile_checked = """
 QPushButton {
         background-color: #990000; 
         border-color: #b30000;
+        border-style: inset; 
+        border-width: 5px; 
 }
 
 """
@@ -102,6 +99,8 @@ QPushButton {
         background-color: #66cc66; 
         color: white; 
         border-color: #53c653;
+        border-style: inset; 
+        border-width: 5px; 
 }
 
 """
@@ -112,6 +111,8 @@ QPushButton {
         background-color: #ff8000; 
         color: blue; 
         border-color: #e67300;
+        border-style: inset; 
+        border-width: 5px; 
 }
 
 """
