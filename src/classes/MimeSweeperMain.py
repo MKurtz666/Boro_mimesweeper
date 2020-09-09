@@ -27,14 +27,17 @@ class MimeSweeperMain(QMainWindow):
         # assigning content to tiles that are not MIME tiles
         generate_clean_tiles(self)
 
+    def start_new_game(self):
+        self.close()
+        new_window = MimeSweeperMain()
+        new_window.show()
+
     def stepped_on_a_mime(self):
         # # dialog to be displayed if stepped on a mime
         game_over_box = QMessageBox.question(self, 'Game over',
                                              'You stepped on a mime. Game over man! \n Do you want to start over?',
                                              QMessageBox.Yes, QMessageBox.No)
         if game_over_box == QMessageBox.Yes:
-            self.close()
-            new_window = MimeSweeperMain()
-            new_window.show()
+            self.start_new_game()
         else:
             self.close()

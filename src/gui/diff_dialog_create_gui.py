@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtWidgets import QDialog, QLayout, QDesktopWidget, QGridLayout, QLabel, QPushButton
+from PyQt5.QtWidgets import QDesktopWidget, QGridLayout, QLabel, QPushButton
 from PyQt5.QtGui import QIcon
 from src.stylesheets.stylesheets import dark_grey
 
@@ -64,6 +64,5 @@ def diff_dialog_create_gui(window):
     proceed = QPushButton('** PROCEED **')
     proceed.clicked.connect(window.close)
     layout.addWidget(proceed, 5, 1, 1, 2)
-
     layout.setSpacing(0)
     window.setLayout(layout)

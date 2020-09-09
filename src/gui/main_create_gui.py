@@ -1,5 +1,5 @@
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout, QMessageBox
+from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout, QMessageBox, QAction
 from PyQt5.QtGui import QIcon
 from src.classes.Tile import Tile
 from src.stylesheets.stylesheets import dark_grey
@@ -18,11 +18,6 @@ def mimesweeper_main_create_gui(window):
     # moving the center of window to the center of the desktop
     qt_rectangle.moveCenter(center_point)
     window.move(qt_rectangle.topLeft())
-    # creating menu bar - later possibly to be moved to separate file
-    menu_bar = QMenuBar(window)
-    window.setMenuBar(menu_bar)
-    # adding first action
-    file_menu = menu_bar.addMenu('File')
     # creating and adding the central widget to house the tiles
     window.central_widget = QFrame(window)
     window.central_layout = QGridLayout()
@@ -35,6 +30,22 @@ def mimesweeper_main_create_gui(window):
     window.setCentralWidget(window.central_widget)
     window.setStyleSheet(dark_grey)
     window.show()
+    # creating menu bar
+    menu_bar = QMenuBar(window)
+    window.setMenuBar(menu_bar)
+    # adding file menu
+    file_menu = menu_bar.addMenu('File')
+    # adding 'new game' action to the file menu
+    new_game_action = QAction('New Game', window)
+    new_game_action.setShortcut('Ctrl+N')
+    new_game_action.triggered.connect(window.start_new_game)
+    file_menu.addAction(new_game_action)
+    file_menu.addSeparator()
+    # adding 'quit' action to the file menu
+    quit_game_action = QAction('Quit game', window)
+    quit_game_action.setShortcut('Ctrl+Q')
+    quit_game_action.triggered.connect(window.close)
+    file_menu.addAction(quit_game_action)
 
 
 def create_tiles(window):
