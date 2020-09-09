@@ -23,9 +23,6 @@ def mimesweeper_main_create_gui(window):
     window.central_layout = QGridLayout()
     window.central_layout.setContentsMargins(0, 0, 0, 0)
     window.central_layout.setSpacing(0)
-    # creating lists of all tiles and MIME tiles for later use in game logic
-    window.tile_list = []
-    window.mime_list = []
     window.central_widget.setLayout(window.central_layout)
     window.setCentralWidget(window.central_widget)
     window.setStyleSheet(dark_grey)

@@ -74,12 +74,14 @@ class Tile(QPushButton):
             self.setIcon(QIcon())
             self.setStyleSheet(zero_tile_checked)
             self.reveal_neighbouring_zeros(row_index, tile_index)
+            self.parent.check_if_victorious()
         else:
             # if content is neither 'MIME' nor '0' (some MIMEs in the neighbourhood) reveal tile
             self.setText(self.content)
             self.setChecked(True)
             self.setIcon(QIcon())
             self.setStyleSheet(number_tile_checked)
+            self.parent.check_if_victorious()
 
     def reveal_neighbouring_zeros(self, row_index, tile_index):
         # checking for tiles containing a number further down the row

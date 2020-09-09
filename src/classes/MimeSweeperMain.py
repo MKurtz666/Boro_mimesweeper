@@ -14,6 +14,9 @@ class MimeSweeperMain(QMainWindow):
         self.map_width = 0
         self.map_height = 0
         self.mimes_to_be_deployed = 0
+        # creating lists of all tiles and MIME tiles for later use in game logic
+        self.tile_list = []
+        self.mime_list = []
         difficulty_dialog = DifficultyDialog(self)
         difficulty_dialog.exec_()
         # creating main window gui
@@ -41,3 +44,14 @@ class MimeSweeperMain(QMainWindow):
             self.start_new_game()
         else:
             self.close()
+
+    def check_if_victorious(self):
+        checked_list = []
+        for tile in self.tile_list:
+            if tile.isChecked():
+                checked_list.append(tile)
+        if len(checked_list) == (len(self.tile_list) - len(self.mime_list)):
+            self.victory()
+
+    def victory(self):
+        print('Victory')
