@@ -42,7 +42,7 @@ class Tile(QPushButton):
             if not self.isChecked():
                 if self.caution_flag is False:
                     self.setIcon(QIcon('://caution_icon.png'))
-                    self.setIconSize(QSize(20, 20))
+                    self.setIconSize(QSize(30, 30))
                     self.caution_flag = True
                 else:
                     self.setIcon(QIcon())

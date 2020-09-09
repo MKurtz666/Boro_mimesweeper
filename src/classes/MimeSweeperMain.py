@@ -54,4 +54,10 @@ class MimeSweeperMain(QMainWindow):
             self.victory()
 
     def victory(self):
-        print('Victory')
+        game_over_box = QMessageBox.question(self, 'VICTORY!',
+                                             'You swept the s*it out of those mimes! \n Do you want to play again?',
+                                             QMessageBox.Yes, QMessageBox.No)
+        if game_over_box == QMessageBox.Yes:
+            self.start_new_game()
+        else:
+            self.close()

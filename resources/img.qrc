@@ -3,5 +3,6 @@
 		<file>main_icon.png</file>
 		<file>mime_face.png</file>
 		<file>caution_icon.png</file>
+		<file>victory_icon.png</file>
 	</qresource>
 </RCC>
