@@ -1,5 +1,7 @@
 from src.classes.Tile import Tile
 from random import choice
+from time import sleep
+from datetime import datetime, timedelta
 
 
 def generate_mimes(window):
@@ -18,7 +20,8 @@ def generate_mimes(window):
 def create_matrix(window):
     # creating a 2d matrix of tiles for later use in logic based on the parent window tile_list
     window.matrix = [[tile for tile in window.tile_list[window.tile_list.index(tile):window.tile_list.index(tile) +
-                        window.map_width]] for tile in window.tile_list[::window.map_width]]
+                                                                                     window.map_width]] for tile in
+                     window.tile_list[::window.map_width]]
 
 
 def check_if_tile_in_range(matrix, row_index, tile_index_to_be_ckecked):
