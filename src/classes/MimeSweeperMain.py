@@ -65,7 +65,7 @@ class MimeSweeperMain(QMainWindow):
     def victory(self):
         self.game_ended = True
         game_over_box = QMessageBox.question(self, 'VICTORY!',
-                                             'You swept the s*it out of those mimes! \n Do you want to play again?',
+                                             f'Congratulations!\nYour time is: {self.time_elapsed}\nWanna play again?',
                                              QMessageBox.Yes, QMessageBox.No)
         if game_over_box == QMessageBox.Yes:
             self.start_new_game()
@@ -78,7 +78,7 @@ class MimeSweeperMain(QMainWindow):
             if self.game_ended:
                 return
             self.time_elapsed = timedelta(seconds=time_elapsed)
-            print(self.time_elapsed)
+            self.timer_display.setText(str(self.time_elapsed))
             sleep(1)
             time_elapsed += 1
 

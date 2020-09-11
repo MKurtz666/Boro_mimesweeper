@@ -1,9 +1,11 @@
 from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout, QMessageBox, QAction
+from PyQt5.QtWidgets import QFrame, QMenuBar, QDesktopWidget, QLayout, QGridLayout, QMessageBox, QAction, QToolBar, \
+    QLabel, QWidget, QSizePolicy
 from PyQt5.QtGui import QIcon
 from src.classes.Tile import Tile
 from src.stylesheets.stylesheets import dark_grey
 from random import choice
+from datetime import timedelta
 
 
 def mimesweeper_main_create_gui(window):
@@ -30,6 +32,25 @@ def mimesweeper_main_create_gui(window):
     # creating menu bar
     menu_bar = QMenuBar(window)
     window.setMenuBar(menu_bar)
+
+    # creating toolbar
+    window.toolbar = window.addToolBar('toolbar')
+    window.toolbar.setFixedHeight(40)
+    window.toolbar.setMovable(False)
+    # creating left spacer to center the timer display
+    left_spacer = QWidget()
+    left_spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    window.toolbar.addWidget(left_spacer)
+    # creating timer display
+    window.timer_display = QLabel(str(timedelta(seconds=window.time_elapsed)))
+    window.timer_display.setStyleSheet('QLabel {background-color: black; color: red; font: 42px, Fixedsys; '
+                                       'border-style: inset; border-width: 3px; border-color: #6e8291;}')
+    window.toolbar.addWidget(window.timer_display)
+    # creating right spacer to center the timer display
+    right_spacer = QWidget()
+    right_spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    window.toolbar.addWidget(right_spacer)
+
     # adding file menu
     file_menu = menu_bar.addMenu('File')
     # adding 'new game' action to the file menu
