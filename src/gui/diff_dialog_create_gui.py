@@ -27,19 +27,19 @@ def diff_dialog_create_gui(window):
     # creating small size button
     small_size = QPushButton('Small 10x10')
     small_size.setCheckable(True)
-    small_size.clicked.connect(lambda: window.size_button_checked(small_size, 430, 450, 10, 10))
+    small_size.clicked.connect(lambda: window.size_button_checked(small_size, 440, 505, 10, 10))
     window.size_buttons.append(small_size)
     # creating medium size button
     layout.addWidget(small_size, 2, 1)
     medium_size = QPushButton('Medium 15x15')
     medium_size.setCheckable(True)
-    medium_size.clicked.connect(lambda: window.size_button_checked(medium_size, 645, 670, 15, 15))
+    medium_size.clicked.connect(lambda: window.size_button_checked(medium_size, 660, 725, 15, 15))
     window.size_buttons.append(medium_size)
     layout.addWidget(medium_size, 3, 1)
     # creating large size button
     large_size = QPushButton('Large 20x20')
     large_size.setCheckable(True)
-    large_size.clicked.connect(lambda: window.size_button_checked(large_size, 860, 885, 20, 20))
+    large_size.clicked.connect(lambda: window.size_button_checked(large_size, 880, 945, 20, 20))
     window.size_buttons.append(large_size)
     layout.addWidget(large_size, 4, 1)
     # creating ten mimes button

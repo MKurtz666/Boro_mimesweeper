@@ -34,11 +34,13 @@ class MimeSweeperMain(QMainWindow):
         create_matrix(self)
         # assigning content to tiles that are not MIME tiles
         generate_clean_tiles(self)
+        # creating a separate thread in which the timer function will run
         self.timer = Thread(target=self.timer)
         self.timer.daemon = True
         self.timer.start()
 
     def start_new_game(self):
+        # behaviour when starting a new game - current window closed and a new one created
         self.close()
         new_window = MimeSweeperMain()
         new_window.show()
@@ -55,6 +57,7 @@ class MimeSweeperMain(QMainWindow):
             self.close()
 
     def check_if_victorious(self):
+        # function run every time a non-mime tile is revealed to check if the player is victorious
         checked_list = []
         for tile in self.tile_list:
             if tile.isChecked():
@@ -63,6 +66,7 @@ class MimeSweeperMain(QMainWindow):
             self.victory()
 
     def victory(self):
+        # dialog to be displayed if the player is victorious
         self.game_ended = True
         game_over_box = QMessageBox.question(self, 'VICTORY!',
                                              f'Congratulations!\nYour time is: {self.time_elapsed}\nWanna play again?',
@@ -73,6 +77,7 @@ class MimeSweeperMain(QMainWindow):
             self.close()
 
     def timer(self):
+        # function adding value to the time elapsed int every second and displaying time elapsed in appropriate widget
         time_elapsed = self.time_elapsed
         while True:
             if self.game_ended:
